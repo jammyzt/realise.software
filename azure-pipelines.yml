@@ -18,19 +18,15 @@ steps:
   displayName: 'Login to Heroku container register with Docker'
   env:
     HEROKU_API_KEY: $(Heroku API Key)
-  
-- task: Docker@2
-  inputs:
-    command: 'build'
-    Dockerfile: '**/Dockerfile'
-    arguments: '-t realisesoftware'
 
 - script: heroku container:push web -a realisesoftware
   displayName: 'Push container to Heroku'
+  workingDirectory: 'realise.software'
   env:
     HEROKU_API_KEY: $(Heroku API Key)
 
 - script: heroku container:release web -a realisesoftware
   displayName: 'Release container to Heroku'
+  workingDirectory: 'realise.software'
   env:
     HEROKU_API_KEY: $(Heroku API Key)
