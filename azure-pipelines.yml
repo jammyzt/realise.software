@@ -25,12 +25,12 @@ steps:
     Dockerfile: '**/Dockerfile'
     arguments: '-t realisesoftware'
 
-- script: heroku container:push -a realisesoftware web
+- script: heroku container:push web -a realisesoftware
   displayName: 'Push container to Heroku'
   env:
     HEROKU_API_KEY: $(Heroku API Key)
 
-- script: heroku container:release -a realisesoftware web
+- script: heroku container:release web -a realisesoftware
   displayName: 'Release container to Heroku'
   env:
     HEROKU_API_KEY: $(Heroku API Key)
