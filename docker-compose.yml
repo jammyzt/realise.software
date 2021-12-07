@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  realise.software:
+    image: ${DOCKER_REGISTRY-}realise
+    build:
+      context: .
+      dockerfile: realise.software/Dockerfile
