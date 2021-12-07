@@ -174,13 +174,15 @@
 <p>If you have any questions about this Privacy Policy, You can contact us:</p>
 <ul>
     <li>
-        <p>By email: <span id="email_protected">james [at] realise [dot] software</span></p>
+        <p>By email: <a id="email_protected">james [at] realise [dot] software</a></p>
     </li>
  </ul>
 <script>
+    var emailElement = document.getElementById('email_protected');
     var emailString = "james";
     emailString += decodeURIComponent("%40");
     emailString += "realise.software";
 
-    document.getElementById('email_protected').innerHTML = emailString;
+    emailElement.innerHTML = emailString;
+    emailElement.setAttribute('href', 'mailto:' + emailString);
 </script>
