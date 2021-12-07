@@ -2,12 +2,10 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["realise.software/realise.software.csproj", "realise.software/"]
+COPY [".", "realise.software/"]
 RUN dotnet restore "realise.software/realise.software.csproj"
 COPY . .
 WORKDIR "/src/realise.software"
@@ -19,4 +17,8 @@ RUN dotnet publish "realise.software.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "realise.software.dll"]
+#ENTRYPOINT ["dotnet", "realise.software.dll"]
+
+# Use Entrypoint above for local testing
+# Use the following instead for Heroku
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet "realise.software.dll"
